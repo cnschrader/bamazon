@@ -54,10 +54,43 @@ db.connect(function(err) {
   
       ]).then(product => {
         console.log(product);
+        
+        updateProduct();
         db.end();
         
       });
     });
   }
 
-  
+//   function updateProduct(product){
+//       console.log(product.quantity);
+//       console.log(product.product);
+//       // update products set quanity = ? where productName = 'Brocolli'
+//     //   db.query("UPDATE products SET quantity = ? WHERE product_name = ?", (err, res) => {
+//     //       if (err) throw err;
+//     //       const quantity = res.map(row => row.quantity);
+//     //   })
+//   };
+
+function updateProduct() {
+    console.log("Updating all bamazon inventory..\n");
+    const productName = res.map(row => row.product_name);
+    const quantity = res.map(row => row.quantity);
+
+     db.query(
+      "UPDATE products SET ? WHERE ?",
+      [
+        {
+          product: productName
+        },
+        {
+          quantity: quantity - inquirer.name
+        }
+      ],
+      function(err, res) {
+        console.log(res.affectedRows + " products updated!\n");
+        // Call deleteProduct AFTER the UPDATE completes
+        console.log(query.sql);
+    }
+    )};
+    
