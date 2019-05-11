@@ -52,7 +52,7 @@ db.connect(function(err) {
       }
       
   
-      ]).then( function product() {
+      ]).then((product) => {
         console.log(product);
 
         if(productName){
@@ -70,6 +70,7 @@ db.connect(function(err) {
         
       });
     });
+    
   }
 
 //   function updateProduct(product){
@@ -82,25 +83,19 @@ db.connect(function(err) {
 //     //   })
 //   };
 
-function updateProduct() {
+function updateProduct(product) {
+
+    console.log(product);
+
     console.log("Updating all bamazon inventory..\n");
-    let productName = res.map(row => row.product_name);
-            let quantity = res.map(row => row.quantity);
-    db.query(
+    
+    const query = db.query(
         
-        "UPDATE products SET ? WHERE ?",
-        [
-            {
-                product: productName
-            },
-            {
-                quantity: quantity - name
-            }
-        ],
+        "UPDATE products SET quantity = quantity - ? WHERE product_name = ?", [product.quantity, product.product],
         // Call deleteProduct AFTER the UPDATE completes
         (err, res) => {
             if (err) throw err;   
-            
+            console.log(res)
         
         console.log(query.sql);
     }
