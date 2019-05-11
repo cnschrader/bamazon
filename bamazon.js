@@ -52,10 +52,20 @@ db.connect(function(err) {
       }
       
   
-      ]).then(product => {
+      ]).then( function product() {
         console.log(product);
+
+        if(productName){
+
+            updateProduct(product);
+        }
+        else{
+            (err, res) => {
+                if (err) throw err; }
+        }
         
-        updateProduct();
+        
+        
         db.end();
         
       });
@@ -74,23 +84,26 @@ db.connect(function(err) {
 
 function updateProduct() {
     console.log("Updating all bamazon inventory..\n");
-    const productName = res.map(row => row.product_name);
-    const quantity = res.map(row => row.quantity);
-
-     db.query(
-      "UPDATE products SET ? WHERE ?",
-      [
-        {
-          product: productName
-        },
-        {
-          quantity: quantity - inquirer.name
-        }
-      ],
-      function(err, res) {
-        console.log(res.affectedRows + " products updated!\n");
+    let productName = res.map(row => row.product_name);
+            let quantity = res.map(row => row.quantity);
+    db.query(
+        
+        "UPDATE products SET ? WHERE ?",
+        [
+            {
+                product: productName
+            },
+            {
+                quantity: quantity - name
+            }
+        ],
         // Call deleteProduct AFTER the UPDATE completes
+        (err, res) => {
+            if (err) throw err;   
+            
+        
         console.log(query.sql);
     }
+    
     )};
     
