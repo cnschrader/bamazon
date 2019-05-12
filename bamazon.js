@@ -118,7 +118,7 @@ function updateProduct(product) {
                 )
 
                 console.log("Your Total is: " + query)
-                console.log(query.sql);
+                console.log(query);
             }
 
             else{
