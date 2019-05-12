@@ -89,16 +89,45 @@ function updateProduct(product) {
 
     console.log("Updating all bamazon inventory..\n");
     
-    const query = db.query(
-        
-        "UPDATE products SET quantity = quantity - ? WHERE product_name = ?", [product.quantity, product.product],
-        // Call deleteProduct AFTER the UPDATE completes
-        (err, res) => {
-            if (err) throw err;   
-            console.log(res)
-        
-        console.log(query.sql);
-    }
     
-    )};
+
+        const query = db.query(
+        
+            "UPDATE products SET quantity = quantity - ? WHERE product_name = ?", [product.quantity, product.product],
+            // Call deleteProduct AFTER the UPDATE completes
+            (err, res) => {
+                if (err) throw err;   
+                console.log(res)
+            
+            console.log(query.sql);
+            },
+            
+            )
+
+           
+            displaySum(product);
+        };
+
+        function displaySum(product){
+            
+            
+            if(product.quantity > 0){
+
+                const query = db.query(
+                    "SELECT FORMAT(SUM(price * ?), 2) total FROM products", [product.quantity],
+                )
+
+                console.log("Your Total is: " + query)
+                console.log(query.sql);
+            }
+
+            else{
+                console.log("Sorry! Not enough in inventory!")
+            }
+            
+        };
+
+        
+    
+    
     
