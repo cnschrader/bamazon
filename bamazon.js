@@ -73,15 +73,7 @@ db.connect(function(err) {
     
   }
 
-//   function updateProduct(product){
-//       console.log(product.quantity);
-//       console.log(product.product);
-//       // update products set quanity = ? where productName = 'Brocolli'
-//     //   db.query("UPDATE products SET quantity = ? WHERE product_name = ?", (err, res) => {
-//     //       if (err) throw err;
-//     //       const quantity = res.map(row => row.quantity);
-//     //   })
-//   };
+
 
 function updateProduct(product) {
 
@@ -94,7 +86,7 @@ function updateProduct(product) {
         const query = db.query(
         
             "UPDATE products SET quantity = quantity - ? WHERE product_name = ?", [product.quantity, product.product],
-            // Call deleteProduct AFTER the UPDATE completes
+            
             (err, res) => {
                 if (err) throw err;   
                 console.log(res)
@@ -118,7 +110,7 @@ function updateProduct(product) {
                 )
 
                 console.log("Your Total is: " + query)
-                console.log(query);
+                console.log(query.sql);
             }
 
             else{
